@@ -445,3 +445,77 @@ Depois de encontrar o commit com problema, para retornar para o *HEAD* utilize:
 # Contribuições
 
 Sinta-se a vontade para realizar adicionar mais informações ou realizar correções. Fork me!
+
+Primeiro, clone um repositório [Git](http://en.wikipedia.org/wiki/Git_(software)) remoto e um [CD](http://en.wikipedia.org/wiki/Cd_(command)) nele:
+
+```
+$ git clone git://example.com/myproject
+$ cd myproject
+```
+
+Em seguida, observe as ramificações locais no seu repositório:
+
+```
+$ git branch
+* master
+```
+
+Mas existem outros ramos escondidos no seu repositório! Você pode vê-los usando o`-a` bandeira:
+
+```
+$ git branch -a
+* master
+  remotes/origin/HEAD
+  remotes/origin/master
+  remotes/origin/v1.0-stable
+  remotes/origin/experimental
+```
+
+Se você quiser apenas dar uma olhada rápida em um ramo upstream, pode verificar diretamente:
+
+```
+$ git checkout origin/experimental
+```
+
+Mas se você quiser trabalhar nesse ramo, precisará criar um ramo de rastreamento local, que é feito automaticamente por:
+
+```
+$ git checkout experimental
+```
+
+e você verá
+
+```
+Branch experimental set up to track remote branch experimental from origin.
+Switched to a new branch 'experimental'
+```
+
+Essa última linha lança algumas pessoas: "Novo ramo" - hein? O que realmente significa é que a ramificação é retirada do índice e criada localmente para você. o linha *anterior* é realmente mais informativa, pois indica que a ramificação está sendo configurada para rastrear a ramificação remota, o que geralmente significa a ramificação origin / branch_name
+
+Agora, se você olhar para suas filiais locais, é isso que você verá:
+
+```
+$ git branch
+* experimental
+  master
+```
+
+Você pode rastrear mais de um repositório remoto usando `git remote` .
+
+```
+$ git remote add win32 git://example.com/users/joe/myproject-win32-port
+$ git branch -a
+* master
+  remotes/origin/HEAD
+  remotes/origin/master
+  remotes/origin/v1.0-stable
+  remotes/origin/experimental
+  remotes/win32/master
+  remotes/win32/new-widgets
+```
+
+Neste ponto, as coisas estão ficando muito loucas, então corra `gitk`para ver o que está acontecendo:
+
+```
+$ gitk --all &
+```
